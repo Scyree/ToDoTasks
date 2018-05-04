@@ -94,7 +94,7 @@ namespace ToDoTask.Controllers
                 return View(taskEditModel);
             }
 
-            _service.EditTask(id, taskEditModel.Description, taskEditModel.StartDate, taskEditModel.EndDate);
+            _service.EditTask(id, taskEditModel.Title, taskEditModel.Description, taskEditModel.StartDate, taskEditModel.EndDate);
 
             return RedirectToAction(nameof(Index));
         }

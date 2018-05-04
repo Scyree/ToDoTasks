@@ -8,7 +8,7 @@ namespace Service.Interfaces
     {
         IReadOnlyList<ToDoTask> GetAllTasks();
         void CreateTask(string userId, string title, string description, DateTime startDate, DateTime endDate);
-        void EditTask(Guid id, string description, DateTime startDate, DateTime endDate);
+        void EditTask(Guid id, string title, string description, DateTime startDate, DateTime endDate);
         void DeleteTask(Guid id);
         ToDoTask GetTaskById(Guid id);
         double GetHours(Guid id);

@@ -47,7 +47,7 @@ namespace Service.Services
             _repository.CreateTask(toDoTask);
         }
 
-        public void EditTask(Guid id, string description, DateTime startDate, DateTime endDate)
+        public void EditTask(Guid id, string title, string description, DateTime startDate, DateTime endDate)
         {
             var taskToBeEdited = _repository.GetTaskById(id);
 
@@ -58,6 +58,11 @@ namespace Service.Services
                     taskToBeEdited.Description = description;
                 }
 
+                if (title != null)
+                {
+                    taskToBeEdited.Title = title;
+                }
+                
                 _repository.EditTask(taskToBeEdited);
             }
         }
