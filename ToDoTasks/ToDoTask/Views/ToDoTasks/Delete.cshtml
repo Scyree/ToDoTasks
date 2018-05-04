@@ -1,0 +1,40 @@
+﻿@model Entities.ToDoTask
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/Task.css" />
+</environment>
+
+<br />
+
+<h3>Is your task done?</h3>
+<div class="container">
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Complete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

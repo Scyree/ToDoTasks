@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Entities.ToDoTask>
+@using System.Diagnostics
+@using Entities
+@using Service.Interfaces
+@inject IToDoTaskService Service
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/Task.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+</environment>
+
+<br/>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <h4>
+            Browse through your tasks
+        </h4>
+        <a asp-action="Create">..or add a new one</a>
+    </p>
+
+    <div class="container">
+        @{
+            var tasks = Model.ToList();
+            <div class="row">
+                @for (var index = 0; index < tasks.Count; ++index)
+                {
+                
+                    Debug.WriteLine("AICIICICI: " + tasks[index].UserId);
+                    if (tasks[index].UserId.ToString() == UserManager.GetUserId(User))
+                    {
+                        var checkIndex = index + 1;
+                        var displayInfo = "<h4>" + tasks[index].Title + "</h4><p>" + tasks[index].Description + "</p><p>" + Service.GetHours(tasks[index].Id) + " hours left !</p>";
+
+                        <div class="col-md-3 col-3">
+                            <a asp-action="Details" asp-route-id="@tasks[index].Id" data-toggle="tooltip" data-placement="right" data-html="true" title="@displayInfo">
+                                <img src="@Url.Content(tasks[index].Folder + "\\" + tasks[index].ImageName)"/>
+                            </a>                   
+                        </div>
+
+                        if (checkIndex % 4 == 0)
+                        {
+                            <div class="w-100"></div>
+                        }
+                    }
+                }
+            </div>
+        }
+    </div>
+ }
+else
+{
+    <h3>Please register/login to see/add tasks!</h3>
+}
+
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿@model Entities.ToDoTask
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/Task.css" />
+</environment>
+
+<h2>Details for the task:</h2>
+
+<div class="container">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Delete" asp-route-id="@Model.Id">Finish it</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
